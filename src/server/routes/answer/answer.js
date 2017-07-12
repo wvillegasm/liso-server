@@ -33,4 +33,18 @@ answer.post('/', (req, res) => {
 
 });
 
+answer.get('/:id', (req, res) => {
+  res.set('Content-Type', 'application/json');
+  AnswerModel.find({questionId: req.params.id}, 'id text votes').
+  then(answs => {
+
+    res.statusCode = OK;
+    res.json(answs);
+
+  }).catch(err => {
+    res.statusCode = BAD_REQUEST;
+    return res.json({err: err.message});
+  });
+});
+
 export default answer;
