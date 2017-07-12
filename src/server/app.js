@@ -32,7 +32,8 @@ app.use(morgan('dev')); // use env: process.env.ENV=dev
 
 
 app.use(function(req, res, next) {
-  res.set("Access-Control-Allow-Origin", "*");
+  const origin = req.headers['origin'];
+  res.set("Access-Control-Allow-Origin", origin);
   res.set("Access-Control-Allow-Headers", "X-Requested-With,content-type,contenttype,crossdomain,Timezone-Offset,Sample-Source");
   res.set("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.set("Access-Control-Max-Age", `${60 * 4}`);
